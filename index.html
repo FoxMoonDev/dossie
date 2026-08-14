@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquivo Confidencial — Caso Nº 0908</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0c0e;
+    --bg-vignette: #000000;
+    --paper: #ece2c8;
+    --paper-edge: #d9caa3;
+    --paper-shadow: #00000080;
+    --ink: #1e1811;
+    --ink-soft: #4a4030;
+    --red: #7c2b28;
+    --red-bright: #a3352f;
+    --brass: #b8975a;
+    --brass-light: #e3c583;
+    --brass-dark: #7a6033;
+    --line: #c9bb96;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Crimson Pro', serif;
+    min-height:100vh;
+  }
+
+  body{
+    background:
+      radial-gradient(ellipse at center, #14161a 0%, #0b0c0e 55%, #000000 100%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:48px 16px 96px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* film grain */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index:0;
+  }
+
+  .brand{
+    font-family:'Special Elite', monospace;
+    color:var(--brass-light);
+    letter-spacing:0.35em;
+    font-size:11px;
+    text-transform:uppercase;
+    opacity:0.55;
+    margin-bottom:8px;
+    z-index:1;
+  }
+
+  h1.masthead{
+    font-family:'Special Elite', monospace;
+    color:#e8ddc0;
+    text-align:center;
+    font-size:clamp(22px, 5vw, 34px);
+    letter-spacing:0.06em;
+    margin:0 0 4px;
+    text-transform:uppercase;
+    z-index:1;
+  }
+
+  .subhead{
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    color:#8a8272;
+    text-align:center;
+    margin:0 0 44px;
+    font-size:15px;
+    z-index:1;
+  }
+
+  .case{
+    width:100%;
+    max-width:520px;
+    z-index:1;
+  }
+
+  /* ---- Folder / dossier card ---- */
+  .folder{
+    background:var(--paper);
+    border-radius:2px;
+    box-shadow:
+      0 30px 60px -20px var(--paper-shadow),
+      0 2px 0 var(--paper-edge) inset;
+    position:relative;
+    margin-bottom:36px;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(120,100,60,0.05) 28px),
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.4), transparent 60%);
+  }
+
+  .folder::before{
+    content:"";
+    position:absolute;
+    top:-14px;
+    left:26px;
+    width:120px;
+    height:16px;
+    background:var(--paper-edge);
+    clip-path:polygon(6% 0, 94% 0, 100% 100%, 0% 100%);
+  }
+
+  .folder-tab{
+    font-family:'Special Elite', monospace;
+    position:absolute;
+    top:-11px;
+    left:34px;
+    font-size:10px;
+    letter-spacing:0.12em;
+    color:var(--ink-soft);
+    z-index:2;
+  }
+
+  .folder-inner{
+    padding:38px 30px 32px;
+  }
+
+  .case-label{
+    font-family:'Special Elite', monospace;
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:var(--red);
+    text-transform:uppercase;
+    margin:0 0 6px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .case-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:repeating-linear-gradient(90deg, var(--red) 0 4px, transparent 4px 8px);
+    opacity:0.5;
+  }
+
+  .case-title{
+    font-family:'EB Garamond', serif;
+    font-weight:600;
+    font-size:20px;
+    color:var(--ink);
+    margin:0 0 22px;
+  }
+
+  /* ---- Combination lock ---- */
+  .lock-wrap{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:18px 0 22px;
+  }
+
+  .digit{
+    width:56px;
+    background:linear-gradient(180deg, #2a2621, #17140f);
+    border-radius:6px;
+    box-shadow:
+      0 3px 0 var(--brass-dark),
+      0 6px 10px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:6px 0;
+    user-select:none;
+  }
+
+  .digit button{
+    background:none;
+    border:none;
+    color:var(--brass);
+    cursor:pointer;
+    font-size:13px;
+    padding:6px 0;
+    width:100%;
+    line-height:1;
+    transition:color 0.15s;
+  }
+  .digit button:hover{ color:var(--brass-light); }
+  .digit button:active{ transform:translateY(1px); }
+
+  .digit-value{
+    font-family:'Special Elite', monospace;
+    font-size:26px;
+    color:#f1e6c8;
+    width:100%;
+    text-align:center;
+    padding:4px 0;
+    border-top:1px solid rgba(184,151,90,0.25);
+    border-bottom:1px solid rgba(184,151,90,0.25);
+    letter-spacing:0;
+  }
+
+  .lock-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+
+  .open-btn{
+    font-family:'Special Elite', monospace;
+    background:linear-gradient(180deg, var(--brass-light), var(--brass) 60%, var(--brass-dark));
+    color:#20180a;
+    border:none;
+    padding:11px 30px;
+    border-radius:3px;
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 4px 0 #5f4923, 0 8px 14px rgba(0,0,0,0.4);
+    transition:transform 0.08s;
+  }
+  .open-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #5f4923, 0 3px 6px rgba(0,0,0,0.4); }
+
+  .feedback{
+    font-family:'Special Elite', monospace;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    min-height:16px;
+    text-transform:uppercase;
+  }
+  .feedback.denied{ color:var(--red-bright); }
+  .feedback.granted{ color:#4f7a4a; }
+
+  .shake{ animation:shake 0.42s; }
+  @keyframes shake{
+    10%,90%{ transform:translateX(-2px); }
+    20%,80%{ transform:translateX(4px); }
+    30%,50%,70%{ transform:translateX(-8px); }
+    40%,60%{ transform:translateX(8px); }
+  }
+
+  /* ---- Revealed report text ---- */
+  .report{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height 0.6s ease, opacity 0.6s ease, margin 0.6s ease;
+  }
+  .report.show{
+    max-height:900px;
+    opacity:1;
+    margin-top:22px;
+  }
+
+  .report-body{
+    border-top:1px dashed var(--line);
+    padding-top:20px;
+    font-family:'EB Garamond', serif;
+    font-size:17.5px;
+    line-height:1.75;
+    color:var(--ink);
+  }
+
+  .report-body p{
+    margin:0 0 16px;
+  }
+
+  .report-body p:last-child{ margin-bottom:0; }
+
+  .stamp{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    color:var(--red-bright);
+    border:2px solid var(--red-bright);
+    padding:5px 10px;
+    border-radius:3px;
+    transform:rotate(-4deg);
+    margin-top:18px;
+    opacity:0.85;
+  }
+
+  .locked-hint{
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    opacity:0.7;
+  }
+
+  /* thread connecting the two folders */
+  .thread{
+    width:2px;
+    height:34px;
+    margin:-20px auto 2px;
+    background:linear-gradient(var(--red), var(--red));
+    opacity:0;
+    transition:opacity 0.5s;
+    z-index:0;
+  }
+  .thread.show{ opacity:0.55; }
+
+  .folder2{
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity 0.6s ease, max-height 0.8s ease;
+  }
+  .folder2.reveal{
+    opacity:1;
+    max-height:1200px;
+  }
+
+  .final-seal{
+    text-align:center;
+    margin-top:26px;
+  }
+  .final-seal .heart{
+    font-size:20px;
+    color:var(--red-bright);
+  }
+
+  footer{
+    z-index:1;
+    margin-top:20px;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    color:#5a5648;
+    font-size:12px;
+    text-align:center;
+    opacity:0.6;
+  }
+
+  @media (max-width:420px){
+    .digit{ width:44px; }
+    .digit-value{ font-size:21px; }
+    .lock-wrap{ gap:7px; }
+    .folder-inner{ padding:30px 18px 26px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="brand">Departamento de Casos Não Resolvidos</div>
+  <h1 class="masthead">Arquivo Confidencial</h1>
+  <p class="subhead">Duas pastas. Um único caso. Acesso restrito.</p>
+
+  <div class="case">
+
+    <!-- FOLDER 1 -->
+    <div class="folder" id="folder1">
+      <div class="folder-tab">PASTA I</div>
+      <div class="folder-inner">
+        <p class="case-label">Nível de acesso · Básico</p>
+        <h2 class="case-title">Insira o código de abertura</h2>
+
+        <div class="lock-wrap" id="lock1"></div>
+
+        <div class="lock-actions">
+          <button class="open-btn" id="btn1">Destrancar</button>
+          <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <div class="report" id="report1">
+          <div class="report-body">
+            <p>Toda investigação começa com uma cena montada — pequena, iluminada, cheia de detalhes. Bonita demais para ser tudo o que existe.</p>
+            <p>Um bom detetive nunca confia apenas no que está exposto sobre a mesa. Ele pergunta: onde eu esconderia a peça mais importante, se quisesse que só uma pessoa a encontrasse?</p>
+            <p>Não dentro da cena. Sob a estrutura que sustenta a cena.</p>
+            <p>Olhe de novo para o objeto que está com você. Não o que se vê através do vidro — o que está por baixo, por trás, colado onde ninguém pensaria em procurar. Onde a tampa parece ser só tampa.</p>
+            <p>Quando encontrar o que foi escondido ali, você vai reconhecer: aquilo é a continuação deste arquivo. E nele está escrito o código que abre a Pasta II.</p>
+            <span class="stamp">CONTINUA →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thread" id="thread"></div>
+
+    <!-- FOLDER 2 -->
+    <div class="folder folder2" id="folder2">
+      <div class="folder-tab">PASTA II</div>
+      <div class="folder-inner">
+        <p class="case-label">Nível de acesso · Final</p>
+        <h2 class="case-title">Código encontrado sob a tampa</h2>
+
+        <div class="lock-wrap" id="lock2"></div>
+
+        <div class="lock-actions">
+          <button class="open-btn" id="btn2">Encerrar o caso</button>
+          <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <div class="report" id="report2">
+          <div class="report-body" id="poemBody"></div>
+          <div class="final-seal">
+            <div class="stamp">CASO ENCERRADO <span class="heart">♥</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Arquivo pessoal — não replicar sem autorização do detetive responsável.</footer>
+
+<script>
+  const CODE1 = "0908";
+  const CODE2 = "3913";
+
+  const poemLines = [
+    "O caso parece resolvido, mas toda solução carrega um novo véu.",
+    "O que você tem nas mãos é apenas a cena, não o arquivo completo do mistério.",
+    "Procure onde o fim finge ser único, onde a última linha do relato foi escrita sobre outra, invisível.",
+    "Há um plano que não se vê, colado à superfície do óbvio, esperando que o olhar certo o descole do tempo.",
+    "Quando entender que o “acabou” é só mais uma camada da história, aí, e só aí, o quebra-cabeça deixará de ser rascunho."
+  ];
+
+  function buildLock(containerId, digitCount){
+    const el = document.getElementById(containerId);
+    const values = new Array(digitCount).fill(0);
+    for(let i=0;i<digitCount;i++){
+      const d = document.createElement('div');
+      d.className = 'digit';
+      d.innerHTML = `
+        <button data-i="${i}" data-dir="1" aria-label="aumentar">▲</button>
+        <div class="digit-value" id="${containerId}-v${i}">0</div>
+        <button data-i="${i}" data-dir="-1" aria-label="diminuir">▼</button>
+      `;
+      el.appendChild(d);
+    }
+    el.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const i = parseInt(btn.dataset.i);
+        const dir = parseInt(btn.dataset.dir);
+        values[i] = (values[i] + dir + 10) % 10;
+        document.getElementById(`${containerId}-v${i}`).textContent = values[i];
+      });
+    });
+    return values;
+  }
+
+  const values1 = buildLock('lock1', 4);
+  const values2 = buildLock('lock2', 4);
+
+  function shake(el){
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+  }
+
+  document.getElementById('btn1').addEventListener('click', ()=>{
+    const entered = values1.join('');
+    const fb = document.getElementById('feedback1');
+    if(entered === CODE1){
+      fb.textContent = 'Acesso concedido';
+      fb.className = 'feedback granted';
+      document.getElementById('report1').classList.add('show');
+      const thread = document.getElementById('thread');
+      const folder2 = document.getElementById('folder2');
+      setTimeout(()=>{
+        thread.classList.add('show');
+        folder2.classList.add('reveal');
+      }, 400);
+    } else {
+      fb.textContent = 'Código negado';
+      fb.className = 'feedback denied';
+      shake(document.getElementById('folder1'));
+    }
+  });
+
+  document.getElementById('btn2').addEventListener('click', ()=>{
+    const entered = values2.join('');
+    const fb = document.getElementById('feedback2');
+    if(entered === CODE2){
+      fb.textContent = 'Caso encerrado';
+      fb.className = 'feedback granted';
+      const body = document.getElementById('poemBody');
+      if(body.childElementCount === 0){
+        poemLines.forEach(line=>{
+          const p = document.createElement('p');
+          body.appendChild(p);
+        });
+        typeReveal(body, poemLines);
+      }
+      document.getElementById('report2').classList.add('show');
+    } else {
+      fb.textContent = 'Código negado';
+      fb.className = 'feedback denied';
+      shake(document.getElementById('folder2'));
+    }
+  });
+
+  function typeReveal(container, lines){
+    const paragraphs = container.querySelectorAll('p');
+    let lineIndex = 0;
+
+    function typeLine(){
+      if(lineIndex >= lines.length) return;
+      const text = lines[lineIndex];
+      const p = paragraphs[lineIndex];
+      let charIndex = 0;
+      const speed = 18;
+      const interval = setInterval(()=>{
+        p.textContent = text.slice(0, charIndex + 1);
+        charIndex++;
+        if(charIndex >= text.length){
+          clearInterval(interval);
+          lineIndex++;
+          setTimeout(typeLine, 180);
+        }
+      }, speed);
+    }
+    typeLine();
+  }
+</script>
+</body>
+</html>
