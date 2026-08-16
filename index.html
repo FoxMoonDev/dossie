@@ -109,6 +109,21 @@
       radial-gradient(ellipse at top left, rgba(255,255,255,0.4), transparent 60%);
   }
 
+  #briefing{
+    margin-top:0;
+    margin-bottom:44px;
+  }
+  #briefing .report-body{
+    border-top:1px dashed var(--line);
+    padding-top:20px;
+    font-family:'EB Garamond', serif;
+    font-size:17.5px;
+    line-height:1.75;
+    color:var(--ink);
+  }
+  #briefing .report-body p{ margin:0 0 16px; }
+  #briefing .report-body p:last-child{ margin-bottom:0; }
+
   .folder::before{
     content:"";
     position:absolute;
@@ -363,6 +378,22 @@
 
   <div class="case">
 
+    <!-- BRIEFING -->
+    <div class="folder" id="briefing">
+      <div class="folder-tab">RELATÓRIO INICIAL</div>
+      <div class="folder-inner">
+        <p class="case-label">Antes de começar</p>
+        <h2 class="case-title">Você foi contratada para este caso</h2>
+        <div class="report-body">
+          <p>Você foi chamada às pressas. Um caso urgente, sem tempo para hesitar.</p>
+          <p>A arma do crime e as provas estão escondidas em algum lugar desta cena — e o mais perturbador é que essa cena é a sua própria agência.</p>
+          <p>Alguém entrou. Alguém sabia exatamente onde procurar. E alguém escolheu esse dia — hoje — porque sabia que seria o pior momento possível para arruinar sua carreira.</p>
+          <p>Se você não decifrar o que está bem debaixo do seu nariz, o caso mais importante da sua carreira vira o único que você nunca resolveu.</p>
+          <p>Comece pela porta trancada. O primeiro código está mais perto do que você imagina.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- FOLDER 1 -->
     <div class="folder" id="folder1">
       <div class="folder-tab">PASTA I</div>
@@ -379,11 +410,12 @@
 
         <div class="report" id="report1">
           <div class="report-body">
-            <p>Toda investigação começa com uma cena montada — pequena, iluminada, cheia de detalhes. Bonita demais para ser tudo o que existe.</p>
-            <p>Um bom detetive nunca confia apenas no que está exposto sobre a mesa. Ele pergunta: onde eu esconderia a peça mais importante, se quisesse que só uma pessoa a encontrasse?</p>
-            <p>Não dentro da cena. Sob a estrutura que sustenta a cena.</p>
-            <p>Olhe de novo para o objeto que está com você. Não o que se vê através do vidro — o que está por baixo, por trás, colado onde ninguém pensaria em procurar. Onde a tampa parece ser só tampa.</p>
-            <p>Quando encontrar o que foi escondido ali, você vai reconhecer: aquilo é a continuação deste arquivo. E nele está escrito o código que abre a Pasta II.</p>
+            <p>Repare no telefone sobre a mesa da agência: há três chamadas não atendidas piscando na tela silenciosa. Ninguém atendeu, mas ninguém apagou.</p>
+            <p>Um bom detetive nunca ignora o que insiste em chamar. Cada chamada perdida carrega um número — e juntas, elas nunca mentem sobre quem está do outro lado da linha.</p>
+            <p>Ao lado, o alvo de dardos guarda outra regra do ofício: nenhum resultado nasce de um único lançamento. Olhe bem — a soma dos acertos marca nove pontos no placar, nem um a mais, nem um a menos.</p>
+            <p>Acima da mesa, o lustre pisca. Uma das luzes insiste em acender e apagar, incapaz de decidir se quer continuar brilhando — repare em quantas realmente hesitam assim. Só uma.</p>
+            <p>No chão, um livro caído revela mais do que uma queda comum. Uma mão passou por ali antes de você — e não foi com tinta. Na página três, em vermelho, alguém deixou duas palavras que não pertencem a nenhum idioma que você fala: <em>Ich liebe dich</em>.</p>
+            <p>O caso nunca escreve os números diretamente. Ele os deixa espalhados pela cena, esperando o olhar certo. Percorra o consultório na ordem em que os encontrou — do telefone à página do livro caído — e o que restar nas suas mãos é exatamente o que abre a próxima pasta.</p>
             <span class="stamp">CONTINUA →</span>
           </div>
         </div>
@@ -397,7 +429,7 @@
       <div class="folder-tab">PASTA II</div>
       <div class="folder-inner">
         <p class="case-label">Nível de acesso · Final</p>
-        <h2 class="case-title">Código encontrado sob a tampa</h2>
+        <h2 class="case-title">A combinação final</h2>
 
         <div class="lock-wrap" id="lock2"></div>
 
@@ -407,7 +439,15 @@
         </div>
 
         <div class="report" id="report2">
-          <div class="report-body" id="poemBody"></div>
+          <div class="report-body" id="revealBody">
+            <p>O assassino nunca quis te machucar. Ele queria ser visto — e só por você.</p>
+            <p>Três chamadas não atendidas: sempre no mesmo horário, todos os dias, esperando que dessa vez você atendesse.</p>
+            <p>Nove pontos no alvo: nunca o centro, porque o centro nunca foi o objetivo — era te fazer olhar duas vezes.</p>
+            <p>Uma lâmpada que insiste em piscar: um sinal repetido, que só alguém obcecado teria paciência de manter aceso.</p>
+            <p>E na página três, escrito em sangue, não uma ameaça — uma confissão: <em>Ich liebe dich</em>.</p>
+            <p>Você juntou os quatro números como uma detetive treinada junta pistas. Mas foi só quando somou à data em que nasceu que entendeu: o caso nunca foi sobre um crime. Era sobre alguém disposto a montar uma cena inteira só para finalmente dizer o que sempre quis dizer.</p>
+          </div>
+          <div class="report-body" id="poemBody" style="margin-top:26px;"></div>
           <div class="final-seal">
             <div class="stamp">CASO ENCERRADO <span class="heart">♥</span></div>
           </div>
