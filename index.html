@@ -276,7 +276,7 @@
     transition:max-height 0.6s ease, opacity 0.6s ease, margin 0.6s ease;
   }
   .report.show{
-    max-height:900px;
+    max-height:12000px;
     opacity:1;
     margin-top:22px;
   }
@@ -339,7 +339,7 @@
   }
   .folder2.reveal{
     opacity:1;
-    max-height:1200px;
+    max-height:40000px;
   }
 
   .final-seal{
@@ -362,9 +362,49 @@
     opacity:0.6;
   }
 
+  /* ---- Tinta invisível: aparece ao selecionar o texto ---- */
+  .secret, .secret em{
+    color:var(--paper);
+    -webkit-user-select:text;
+    user-select:text;
+    -webkit-touch-callout:default;
+    font-style:normal;
+  }
+  .secret::selection, .secret em::selection, .secret *::selection{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .secret::-moz-selection, .secret em::-moz-selection{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .secret-hint{
+    font-family:'Special Elite', monospace;
+    font-size:12px;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    opacity:0.75;
+    border-top:1px dashed var(--line);
+    padding-top:14px;
+    margin-top:22px;
+  }
+
+  /* ---- Celular ---- */
+  html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  .report-body, .report-body p{ overflow-wrap:break-word; word-wrap:break-word; }
+
+  @media (max-width:600px){
+    body{ padding:32px 12px 72px; }
+    .case-title{ font-size:18px; }
+    .report-body{ font-size:16.5px; line-height:1.7; }
+    .digit{ width:52px; }
+    .digit button{ padding:12px 0; font-size:15px; }
+    .open-btn{ padding:14px 32px; font-size:14px; }
+    .subhead{ margin-bottom:32px; }
+  }
   @media (max-width:420px){
-    .digit{ width:44px; }
-    .digit-value{ font-size:21px; }
+    .digit{ width:46px; }
+    .digit-value{ font-size:22px; }
     .lock-wrap{ gap:7px; }
     .folder-inner{ padding:30px 18px 26px; }
   }
@@ -504,7 +544,8 @@
             <p>Era hora de sair da sala central e seguir o fio invisível além do mural. Perto da porta, encostada na parede como se estivesse ali há anos esperando ser notada, uma maleta de couro vermelho chamava atenção pelo contraste com o resto da decoração — nova demais pra pertencer àquela cena antiga. A fivela estava presa, mas não na primeira posição, nem na última: na terceira. Alguém a tinha fechado com cuidado, não com pressa.</p>
             <p>Ao lado, dois pares de binóculos descansavam sobre a mesa — não um, dois. Um apontado pra dentro da sala, o outro virado exatamente pra janela, como se alguém tivesse passado horas alternando entre vigiar o que acontecia ali dentro e o que vinha de fora. A cortina verde estava amarrada com um nó só, deixando uma fresta estreita — o suficiente pra ver sem ser visto.</p>
             <p>E no canto, o cartaz de recompensa, velho e amarelado, prometia pagamento a quem reconhecesse o rosto estampado nele. Ninguém nunca tinha reparado que o valor prometido começava com cinco — como se o próprio cartaz soubesse que ninguém jamais cobraria aquela recompensa, porque quem procuravam nunca quis fugir. Só queria, finalmente, ser encontrado.</p>
-            <p><em>Mas antes de qualquer porta se abrir, havia uma última conta — e essa não estava em nenhum objeto da sala. Nem todo número mora numa parede, num alvo ou numa janela. Há um último, maior que os outros juntos, que está em quem investiga, e em quem observa sem nunca ter sido visto. Pegue os anos que você já viveu até hoje. Pegue os anos que ele também viveu, escondido nas sombras deste caso, perto demais o tempo todo. Some as duas idades, lado a lado, como duas histórias que finalmente se encontram — e o número que sobrar fecha este arquivo de uma vez por todas.</em></p>
+            <p class="secret-hint">✎ Nem toda tinta aparece a olho nu.</p>
+            <p class="secret"><em>Mas antes de qualquer porta se abrir, havia uma última conta — e essa não estava em nenhum objeto da sala. Nem todo número mora numa parede, num alvo ou numa janela. Há um último, maior que os outros juntos, que está em quem investiga, e em quem observa sem nunca ter sido visto. Pegue os anos que você já viveu até hoje. Pegue os anos que ele também viveu, escondido nas sombras deste caso, perto demais o tempo todo. Some as duas idades, lado a lado, como duas histórias que finalmente se encontram — e o número que sobrar fecha este arquivo de uma vez por todas.</em></p>
             <span class="stamp">CONTINUA →</span>
           </div>
         </div>
